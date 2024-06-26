@@ -10,7 +10,7 @@ Secondly, you would have to install and use a specific version of Panda3D, which
 
 You can install Panda3D SDK through the 32-bit (x86) or 64-bit (x86_64) installers here:
 
-[Panda3D SDK for Windows (Python 3.9, x86_64, Last Updated: January 11, 2023)](https://mega.nz/file/uAMxEKqL#yQfS9UPpYHzKYDR5vq-LF5gxxLa6HUmxLUp65uzneVo)
+[Panda3D SDK for Windows (Python 3.9, x86_64, Last Updated: January 11, 2023)](https://github.com/sam-sneed/oldschool-toontown/releases/download/x64-1/Panda3D-1.11.0-py3.9-x64.exe)
 
 If you install Panda3D outside the default directory (or use the x86 installer), you may have to change the `PPYTHON_PATH` file located in the root directory and change it to your install directory.
 
