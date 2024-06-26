@@ -15,7 +15,7 @@ You can install Panda3D SDK through the 32-bit (x86) or 64-bit (x86_64) installe
 If you install Panda3D outside the default directory (or use the x86 installer), you may have to change the `PPYTHON_PATH` file located in the root directory and change it to your install directory.
 
 ## macOS 10.9+
-[Panda3D Wheel for macOS 10.9+ (Python3.9, x86_64)](https://drive.google.com/file/d/1_6WJxrkNfwisK5pe5ubJJy1psEp0IIft/view?usp=sharing)
+[Panda3D Wheel for macOS 10.9+ (Python3.9, x86_64)](https://github.com/sam-sneed/oldschool-toontown/releases/download/x64-1/panda3d-1.11.0-cp39-cp39-macosx_10_9_x86_64.whl)
 
 Installing the provided Panda3D wheel requires Python 3.9, which is not installed on your system by default whatsoever.  We recommend installing Python 3.9 through [Homebrew](https://brew.sh/) (Make sure that the xcode command line tools are installed first `xcode-select --install`): 
 ```shell
