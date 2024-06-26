@@ -45,3 +45,5 @@ class ToontownUDRepository(ToontownInternalRepository):
         if __astron__:
             # Create our Astron login manager...
             self.astronLoginManager = self.generateGlobalObject(OTP_DO_ID_ASTRON_LOGIN_MANAGER, 'AstronLoginManager')
+            self.chatHandler = self.generateGlobalObject(OTP_DO_ID_CHAT_ROUTER, 'ChatHandler')
+            self.avatarFriendsManager = self.generateGlobalObject(OTP_DO_ID_AVATAR_FRIENDS_MANAGER, 'AvatarFriendsManager')

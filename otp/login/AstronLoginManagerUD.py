@@ -760,7 +760,7 @@ class LoadAvatarOperation(AvatarOperation):
     def __handleSetAvatar(self):
         # Get the client channel.
         channel = self.loginManager.GetAccountConnectionChannel(self.sender)
-
+        
          # We will first assign a POST_REMOVE that will unload the
          # avatar in the event of them disconnecting while we are working.
         cleanupDatagram = PyDatagram()
@@ -808,7 +808,7 @@ class UnloadAvatarOperation(GameOperation):
 
     def __handleUnloadAvatar(self):
         channel = self.loginManager.GetAccountConnectionChannel(self.sender)
-
+        self.loginManager.air.avatarFriendsManager.avatarOffline(self.avId)
         datagram = PyDatagram()
         datagram.addServerHeader(channel, self.loginManager.air.ourChannel, CLIENTAGENT_CLEAR_POST_REMOVES)
         self.loginManager.air.send(datagram)

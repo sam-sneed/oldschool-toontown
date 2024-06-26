@@ -1,5 +1,5 @@
-# Open Toontown
-This repository contains the code for Open Toontown, based on the latest version of Disney's Toontown Online (sv1.0.47.38).
+# Oldschool Toontown
+This repository contains the code for Open Toontown, plus some added features from (at the time of adding) bleeding-edge commits. It is based on the latest version of Disney's Toontown Online (sv1.0.47.38).
 
 # Setup
 After cloning the repository, you will need to clone the [resources](https://github.com/open-toontown/resources) repository inside the directory where you cloned the source repo.
@@ -47,3 +47,9 @@ How you commit changes is your choice, but please include what you did and a bas
 * `minigames: Fix crash when entering the trolley`
 * `racing: Fix possible race condition when two racers tied`
 * `golf: Refix wonky physics once and for all (hopefully)`
+
+# Known issues...
+
+* Estates don't work.
+* Fishing doesn't work.
+* Parties don't work.
