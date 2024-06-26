@@ -2,15 +2,13 @@
 This repository contains the code for Open Toontown, plus some added features from (at the time of adding) bleeding-edge commits. It is based on the latest version of Disney's Toontown Online (sv1.0.47.38).
 
 # Setup
-After cloning the repository, you will need to clone the [resources](https://github.com/open-toontown/resources) repository inside the directory where you cloned the source repo.
+After cloning the repository, you will need to clone the [resources](https://github.com/sam-sneed/resources) repository inside the directory where you cloned the source repo.
 
 Secondly, you would have to install and use a specific version of Panda3D, which includes `libotp` and `libtoontown`.  You can use the prebuilt installers for your operating system here:
 
 ## Windows
 
 You can install Panda3D SDK through the 32-bit (x86) or 64-bit (x86_64) installers here:
-
-[Panda3D SDK for Windows (Python 3.9, x86, Last Updated: January 11, 2023)](https://mega.nz/file/6UsARa7R#pg5KgxW0NgkHEl_k0fK6NbBK8LfdEcDGZ6NsVeWwDKM)
 
 [Panda3D SDK for Windows (Python 3.9, x86_64, Last Updated: January 11, 2023)](https://mega.nz/file/uAMxEKqL#yQfS9UPpYHzKYDR5vq-LF5gxxLa6HUmxLUp65uzneVo)
 
