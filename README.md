@@ -1,5 +1,5 @@
 # Oldschool Toontown
-This repository contains the code for Open Toontown, plus some added features from (at the time of adding) bleeding-edge commits. It is based on the latest version of Disney's Toontown Online (sv1.0.47.38).
+This repository contains the code for Open Toontown, plus some added features from (at the time of adding) bleeding-edge commits. It is based on the latest version of Disney's Toontown Online (sv1.0.47.38). Basically, a slightly more stable version of DarthMDev's toontown fork.
 
 # Setup
 After cloning the repository, you will need to clone the [resources](https://github.com/sam-sneed/resources) repository inside the directory where you cloned the source repo, making sure the parent directory of the phase folders (phase_3.5, phase_4, phase_6, etc) is in a subdirectory of the oldschool toontown root folder (ex: C:\cloned-repos\oldschool-toontown, where the "toontown" and "otp" folders are, among others.) called "resources" (so it should be C:\cloned-repos\oldschool-toontown\resources).
