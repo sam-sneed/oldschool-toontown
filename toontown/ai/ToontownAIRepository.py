@@ -5,7 +5,6 @@ from panda3d.toontown import *
 from otp.ai.AIZoneData import AIZoneDataStore
 from otp.ai.TimeManagerAI import TimeManagerAI
 from otp.distributed.OtpDoGlobals import *
-from otp.friends.FriendManagerAI import FriendManagerAI
 from toontown.ai.HolidayManagerAI import HolidayManagerAI
 from toontown.ai.NewsManagerAI import NewsManagerAI
 from toontown.ai.WelcomeValleyManagerAI import WelcomeValleyManagerAI
@@ -20,6 +19,7 @@ from toontown.coghq.PromotionManagerAI import PromotionManagerAI
 from toontown.distributed.ToontownDistrictAI import ToontownDistrictAI
 from toontown.distributed.ToontownDistrictStatsAI import ToontownDistrictStatsAI
 from toontown.distributed.ToontownInternalRepository import ToontownInternalRepository
+from toontown.estate.EstateManagerAI import EstateManagerAI
 from toontown.hood import ZoneUtil
 from toontown.hood.BRHoodDataAI import BRHoodDataAI
 from toontown.hood.BossbotHQDataAI import BossbotHQDataAI
@@ -94,6 +94,9 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.trophyMgr = None
         self.safeZoneManager = None
         self.magicWordManager = None
+        self.friendManager = None
+        self.toontownFriendsManager = None
+        self.estateMgr = None
         self.partyManager = None
         self.zoneTable = {}
         self.dnaStoreMap = {}
@@ -118,14 +121,15 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         # Setup necessary files and things.
         self.setupFiles()
-
+        
+        # Create our global objects.
+        self.notify.info('Creating global objects...')
+        self.createGlobals()
         # Create our local objects.
         self.notify.info('Creating local objects...')
         self.createLocals()
 
-        # Create our global objects.
-        self.notify.info('Creating global objects...')
-        self.createGlobals()
+
 
         # Create our zones.
         self.notify.info('Creating zones...')
@@ -225,6 +229,19 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.magicWordManager = ToontownMagicWordManagerAI(self)
         self.magicWordManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
+        # Generate our friend manager...
+        self.friendManager = self.generateGlobalObject(OTP_DO_ID_FRIEND_MANAGER, 'FriendManager')
+
+        if __astron__:
+            # Generate our Toontown friends manager...
+            # TODO: Is this Astron specific?
+            self.toontownFriendsManager = self.generateGlobalObject(OTP_DO_ID_TOONTOWN_FRIENDS_MANAGER,
+                                                                    'ToontownFriendsManager')
+
+        # Generate our estate manager...
+        self.estateMgr = EstateManagerAI(self)
+        self.estateMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+
         # Generate our Tutorial manager...
         self.tutorialManager = TutorialManagerAI(self)
         self.tutorialManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
@@ -232,9 +249,6 @@ class ToontownAIRepository(ToontownInternalRepository):
         # Generate our party manager...
         self.partyManager = DistributedPartyManagerAI(self)
         self.partyManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
-
-        self.friendManager = FriendManagerAI(self)
-        self.friendManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
     def generateHood(self, hoodConstructor, zoneId):
         # Bossbot HQ doesn't use DNA, so we skip over that.
@@ -506,6 +520,33 @@ class ToontownAIRepository(ToontownInternalRepository):
 
     def trueUniqueName(self, idString):
         return self.uniqueName(idString)
+
+    def makeFriends(self, avatarAId, avatarBId, flags, context):
+        """
+        Requests to make a friendship between avatarA and avatarB with
+        the indicated flags (or upgrade an existing friendship with
+        the indicated flags).  The context is any arbitrary 32-bit
+        integer.  When the friendship is made, or the operation fails,
+        the "makeFriendsReply" event is generated, with two
+        parameters: an integer result code, and the supplied context.
+        """
+        if __astron__:
+            self.toontownFriendsManager.sendMakeFriends(avatarAId, avatarBId, flags, context)
+
+    def requestSecret(self, requesterId):
+        """
+        Requests a "secret" from the friends manager.  This is a
+        unique string that will be associated with the indicated
+        requesterId, for the purposes of authenticating true-life
+        friends.
+
+        When the secret is ready, a "requestSecretReply" message will
+        be thrown with three parameters: the result code (0 or 1,
+        indicating failure or success), the generated secret, and the
+        requesterId again.
+        """
+        if __astron__:
+            self.toontownFriendsManager.sendRequestSecret(requesterId)
 
     def setupFiles(self):
         if not os.path.exists(self.dataFolder):

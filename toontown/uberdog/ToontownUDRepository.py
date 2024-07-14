@@ -17,6 +17,7 @@ class ToontownUDRepository(ToontownInternalRepository):
         ToontownInternalRepository.__init__(self, baseChannel, serverId, dcSuffix='UD')
         self.toontownTimeManager = None
         self.astronLoginManager = None
+        self.toontownFriendsManager = None
 
     def handleConnected(self):
         ToontownInternalRepository.handleConnected(self)
@@ -45,5 +46,7 @@ class ToontownUDRepository(ToontownInternalRepository):
         if __astron__:
             # Create our Astron login manager...
             self.astronLoginManager = self.generateGlobalObject(OTP_DO_ID_ASTRON_LOGIN_MANAGER, 'AstronLoginManager')
-            self.chatHandler = self.generateGlobalObject(OTP_DO_ID_CHAT_ROUTER, 'ChatHandler')
-            self.avatarFriendsManager = self.generateGlobalObject(OTP_DO_ID_AVATAR_FRIENDS_MANAGER, 'AvatarFriendsManager')
+
+            # Create our Toontown friends manager... (Astron specific)
+            self.toontownFriendsManager = self.generateGlobalObject(OTP_DO_ID_TOONTOWN_FRIENDS_MANAGER, 'ToontownFriendsManager')
+        self.chatHandler = self.generateGlobalObject(OTP_DO_ID_CHAT_HANDLER, 'ChatHandler')
